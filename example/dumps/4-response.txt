@@ -1,0 +1,8 @@
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Tue, 22 Jun 2021 21:46:05 GMT
+Connection: close
+Content-Length: 1319
+X-Burp-Comment:   |  
+
+[{"id":1,"category":{"id":1,"name":"dogs"},"name":"Bau","photoUrls":["dogphoto.com"],"tags":[{"id":1,"name":"brown"},{"id":5,"name":"big"}],"status":"available"},{"id":2,"category":{"id":2,"name":"cats"},"name":"Miao","photoUrls":["catphoto.com","catphoto2.com"],"tags":[{"id":2,"name":"white"},{"id":5,"name":"big"}],"status":"sold"},{"id":3,"category":{"id":2,"name":"cats"},"name":"Kitty","photoUrls":["kittyphoto.com"],"tags":[{"id":4,"name":"black"},{"id":5,"name":"big"}],"status":"pending"},{"id":4,"category":{"id":3,"name":"fishes"},"name":"Flipper","photoUrls":["filpper.com","fish.com"],"tags":[{"id":1,"name":"brown"},{"id":6,"name":"medium"}],"status":"available"},{"id":5,"category":{"id":4,"name":"birds"},"name":"Cip","photoUrls":["bird.com","cip.com"],"tags":[{"id":3,"name":"gray"},{"id":6,"name":"medium"}],"status":"available"},{"id":6,"category":{"id":4,"name":"birds"},"name":"Ciop","photoUrls":["ciop.com"],"tags":[{"id":4,"name":"black"},{"id":7,"name":"small"}],"status":"available"},{"id":7,"category":{"id":5,"name":"equines"},"name":"Noir","photoUrls":["horsephoto.com","noir.com"],"tags":[{"id":2,"name":"white"},{"id":4,"name":"black"},{"id":6,"name":"medium"}],"status":"sold"},{"id":8,"category":{"id":2,"name":"cats"},"name":"meow","photoUrls":["myurl"],"tags":[],"status":"available"}]

@@ -1,0 +1,16 @@
+POST /v2/pet HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: PostmanRuntime/7.26.8
+Host: localhost:8080
+Accept-Encoding: gzip, deflate
+Connection: close
+Content-Length: 76
+X-Burp-Comment:   |  
+
+{
+    "name": "doggie",
+    "photoUrls": [
+        "myurl.com/photo"
+    ]
+}

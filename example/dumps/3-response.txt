@@ -1,0 +1,8 @@
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Tue, 22 Jun 2021 21:45:57 GMT
+Connection: close
+Content-Length: 109
+X-Burp-Comment:   |  
+
+{"id":8,"category":{"id":2,"name":"cats"},"name":"meow","photoUrls":["myurl"],"tags":[],"status":"available"}

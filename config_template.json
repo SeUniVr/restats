@@ -1,0 +1,7 @@
+{
+	"modules": "all | dataCollection | statistics",
+	"specification": "/path/to/specification.json",
+	"dumpsDir": "/path/to/dumps",
+	"reportsDir": "/path/to/reports",
+	"dbPath": "/path/to/database.sqlite"
+}
