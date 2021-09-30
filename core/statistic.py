@@ -53,6 +53,7 @@ def getOperationCoverage(specDict, dbfile):
 	# Get every operation name for every path that has been tested
 	operationsTested = dbm.getOperationNames()
 	tested = {}
+	documentedAndTested = {}
 	for r in operationsTested:
 		tested.setdefault(r[1], []).append(r[0])
 
@@ -67,11 +68,10 @@ def getOperationCoverage(specDict, dbfile):
 			[x for x in operationsPerPath[path] if x not in tested[path]]
 		# Remove the count of the unexpected from the found to get the tested
 		operationsTestedCount = operationsTestedCount - len(not_expected[path])
+		documentedAndTested[path] = [x for x in tested[path] if x not in not_expected[path]]
 
-	
 	with open(dest + '/operation_coverage.json', 'w+') as out:
-		json.dump({jsonTestedKey : tested, jsonNotTestedKey : operationsPerPath, jsonNotExpectedKey : not_expected}, out, indent='\t')
-
+		json.dump({jsonTestedKey : documentedAndTested, jsonNotTestedKey : operationsPerPath, jsonNotExpectedKey : not_expected}, out, indent='\t')
 
 
 	dbm.close()
