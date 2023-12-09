@@ -16,7 +16,7 @@ def RawHTTPRequest2Dict(requestFile):
 	hasFormParams = hasJSONbody = False
 
 	# Have to open the file as binary because of the payload
-	with requestFile.open('rb') as f:
+	with open(requestFile, 'rb') as f:
 		line = str(f.readline(), 'UTF-8')
 		line = line.split()
 
@@ -101,7 +101,7 @@ def RawHTTPResponse2Dict(responseFile):
 
 
 	# Have to open the file as binary because of the payload
-	with responseFile.open('rb') as f:
+	with open(responseFile, 'rb') as f:
 		line = str(f.readline(), 'UTF-8')
 
 		# Check whether the file is empty or not
