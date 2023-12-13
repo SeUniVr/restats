@@ -84,12 +84,12 @@ def addParameterValue(parameterID, value):
     conn.execute(sql, (parameterID, str(value)))
 
 
-def addResponse(pathID, method, status, cType):
+def addResponse(pathID, method, status, cType, responseBody):
     method = method.lower()
 
-    sql = 'INSERT OR IGNORE INTO responses VALUES (?, ?, ?, ?)'
+    sql = 'INSERT OR IGNORE INTO responses VALUES (?, ?, ?, ?, ?)'
 
-    conn.execute(sql, (pathID, method, status, cType))
+    conn.execute(sql, (pathID, method, status, cType, responseBody))
 
 
 def getValues():
@@ -268,3 +268,29 @@ def getParameterValues(path_id, method, paramName):
     res = [x[0] for x in res]
 
     return res
+
+def getOperationTested():
+    sql = '''
+        SELECT DISTINCT res.path, res.method
+        FROM (responses JOIN paths ON responses.path_id=paths.id) AS res
+        WHERE CAST(res.status AS integer) >= 200 AND CAST(res.status AS integer) < 300
+        '''
+
+    return conn.execute(sql).fetchall()
+
+def getAllErrors():
+    sql = '''
+        SELECT DISTINCT res.status, res.path, res.body
+        FROM (responses JOIN paths ON responses.path_id = paths.id) AS res      
+        WHERE CAST(res.status AS int) > 499
+        '''
+
+    return conn.execute(sql).fetchall()
+
+def getAllResponseStatusCode():
+    sql = '''
+        SELECT status
+        FROM responses    
+        '''
+
+    return conn.execute(sql).fetchall()

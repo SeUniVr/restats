@@ -1,7 +1,7 @@
 {
 	"modules": "all",
-	"specification": "/home/davide/restats-demo/petstore.json",
-	"dumpsDir": "/home/davide/restats-demo/dumps",
-	"reportsDir": "/home/davide/restats-demo/reports",
-	"dbPath": "/home/davide/restats-demo/database.sqlite"
+	"specification": "/mnt/c/Users/zenom/OneDrive/Documenti/LavoroUniversità/tools/last-restat/restats/example/features-service-openapi.json",
+	"logFile": "/mnt/d/Risultati/features-service/DRLAndIntensification (0)/Run4/features-service.txt",
+	"reportsDir": "/mnt/d/Risultati/features-service/DRLAndIntensification (0)/Run4/restats/",
+	"dbPath": "/mnt/d/Risultati/features-service/DRLAndIntensification (0)/Run4/restats/database.sqlite"
 }

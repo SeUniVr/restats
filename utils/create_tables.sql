@@ -31,6 +31,7 @@ CREATE TABLE responses
     method VARCHAR NOT NULL,
     status VARCHAR(3) NOT NULL,
     content_type VARCHAR NOT NULL,
+    body VARCHAR,
     PRIMARY KEY(status, path_id, method, content_type),
     FOREIGN KEY(path_id) REFERENCES paths(id)
 );

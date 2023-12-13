@@ -1,5 +1,6 @@
 from urllib.parse import parse_qs, urlsplit
 import json
+import tempfile
 
 methodsWithRequestBody = {'post', 'put', 'patch'}
 
@@ -15,8 +16,13 @@ def RawHTTPRequest2Dict(requestFile):
 	body = {}
 	hasFormParams = hasJSONbody = False
 
-	# Have to open the file as binary because of the payload
-	with open(requestFile, 'rb') as f:
+	tmp = tempfile.NamedTemporaryFile()
+
+	# Open the file for writing.
+	with open(tmp.name, 'w') as f:
+		f.write(requestFile)  # where `stuff` is, y'know... stuff to write (a string)
+
+	with open(tmp.name, 'rb') as f:
 		line = str(f.readline(), 'UTF-8')
 		line = line.split()
 
@@ -41,7 +47,7 @@ def RawHTTPRequest2Dict(requestFile):
 
 			# If an empty line is found, then there are no other headers.
 			# There could only be some POST parameters left to parse.
-			if line == '\r\n' :
+			if line == '\n' :
 				stop = i
 				break
 
@@ -99,9 +105,14 @@ def RawHTTPResponse2Dict(responseFile):
 	parameters = []
 	body = ''
 
+	tmp = tempfile.NamedTemporaryFile()
+
+	# Open the file for writing.
+	with open(tmp.name, 'w') as f:
+		f.write(responseFile)  # where `stuff` is, y'know... stuff to write (a string)
 
 	# Have to open the file as binary because of the payload
-	with open(responseFile, 'rb') as f:
+	with open(tmp.name, 'rb') as f:
 		line = str(f.readline(), 'UTF-8')
 
 		# Check whether the file is empty or not
@@ -112,11 +123,15 @@ def RawHTTPResponse2Dict(responseFile):
 		status = line[1]
 		message = ' '.join(line[2:]) #Joins with a whitespace all the words from the message
 
+		stop = None
 		# The first line has already been read. The next lines contain the headers
-		for line in f.readlines():
-			line = str(line, 'UTF-8')
+		lines = f.readlines()
+		for i in range(len(lines)):
+			line = str(lines[i], 'UTF-8')
 			# If an empty line is found, then there are no other headers.
-			if line == '\r\n': break
+			if line == '\n':
+				stop = i
+				break
 
 			line = line.split(':')
 
@@ -128,7 +143,11 @@ def RawHTTPResponse2Dict(responseFile):
 				line[1] = line[1].split(';')[0]
 
 			parameters.append({ 'in' : 'header', 'name' : line[0], 'value' : ':'.join([x.strip(' \r\n') for x in line[1:]])})
-	
+		if stop is not None:
+			# parse body
+			lines = [str(x, 'UTF-8') for x in lines[stop + 1:]]
+			lines = "".join(lines)
+			body += lines
 	return {
 	'status' : status,
 	'message' : message,
