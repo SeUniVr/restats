@@ -47,7 +47,7 @@ def RawHTTPRequest2Dict(requestFile):
 
 			# If an empty line is found, then there are no other headers.
 			# There could only be some POST parameters left to parse.
-			if line == '\n' :
+			if line == '\n' or line == '\r\n' :
 				stop = i
 				break
 

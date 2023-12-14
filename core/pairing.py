@@ -65,7 +65,8 @@ def generatePairs(confDict, pathsInSpec, basesInSpec):
 		requests_and_responses = str(f.read(), 'UTF-8').split("========REQUEST========\n")
 		for request_and_response in requests_and_responses:
 			counter +=1
-			print("interaction num "+ str(counter))
+			if counter % 100 == 0:
+				print("interaction num "+ str(counter))
 			if "RESPONSE" in request_and_response:
 				log_request = request_and_response.split("========RESPONSE=========\n")[0]
 				log_response = request_and_response.split("========RESPONSE========\n")[1]
