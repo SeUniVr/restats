@@ -11,7 +11,7 @@ def callOptionMethod(confDict):
 	modules = confDict['modules']
 
 	# Extract data from specification (needed to parse pairs)
-	specDict = par.extractSpecificationData(conf['specification'])
+	specDict = par.extractSpecificationData(confDict['specification'])
 	# Pop the base paths of the API
 	bases = specDict.pop('bases')
 
