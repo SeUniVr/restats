@@ -162,23 +162,21 @@ def getStatusClassCoverage(specDict, dbfile):
 		for method, x in vals.items():
 			statusTestedCount = statusTestedCount + len(x)
 
+	# Cast the sets to lists in order to save as json
+	for path, vals in statusInSpec.items():
+		for method, x in vals.items():
+			statusInSpec[path][method] = list(x)
 
-		# Cast the sets to dict in order to save it as json
-		for path, vals in statusInSpec.items():
-			for method, x in vals.items():
-				statusInSpec[path][method] = list(x)
+	for path, vals in tested.items():
+		for method, x in vals.items():
+			tested[path][method] = list(x)
 
-		for path, vals in tested.items():
-			for method, x in vals.items():
-				tested[path][method] = list(x)
+	for path, vals in not_expected.items():
+		for method, x in vals.items():
+			not_expected[path][method] = list(x)
 
-		for path, vals in not_expected.items():
-			for method, x in vals.items():
-				not_expected[path][method] = list(x)
-
-		with open(dest + 'status_class_coverage.json', 'w+') as out:
-			json.dump({jsonTestedKey : tested, jsonNotTestedKey : statusInSpec, jsonNotExpectedKey : not_expected}, out, indent='\t')
-
+	with open(dest + 'status_class_coverage.json', 'w+') as out:
+		json.dump({jsonTestedKey : tested, jsonNotTestedKey : statusInSpec, jsonNotExpectedKey : not_expected}, out, indent='\t')
 
 	dbm.close()
 	return {jsonTotalKey : statusInSpecCount, jsonTestedKey : statusTestedCount}
