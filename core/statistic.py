@@ -29,13 +29,6 @@ def getPathCoverage(paths, dbfile):
 
 	return {jsonTotalKey : len(paths), jsonTestedKey : count, jsonFoundKey : count}
 
-	with open(dest + 'path_coverage.json', 'w+') as out:
-		json.dump({jsonTestedKey : testedPaths, jsonNotTestedKey : untestedPaths}, out, indent='\t')
-
-	dbm.close()
-
-	return {jsonTestedKey : count, 'total' : len(paths), jsonNotTestedKey : len(untestedPaths)}
-
 
 def getOperationCoverage(specDict, dbfile):
 	dbm.create_connection(dbfile)
