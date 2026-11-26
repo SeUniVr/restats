@@ -91,7 +91,7 @@ def getStatusCoverage(specDict, dbfile):
 			statusInSpecCount = statusInSpecCount + len(x['responses'])
 			
 			statusInSpec.setdefault(path, {})
-			statusInSpec[path][method] = x['responses']
+			statusInSpec[path][method] = list(x['responses'])
 
 	# get status tested from the db
 	statusTested = dbm.getStatusCodes()
@@ -395,6 +395,7 @@ def computeTCL(coverageDictionary):
 	else:
 		return tcl
 
+	return tcl
 
 
 def generateStats(specDict, confDict):
