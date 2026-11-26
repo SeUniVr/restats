@@ -43,7 +43,7 @@ if __name__ == '__main__':
 		conf = json.load(j)
 
 	for k in conf:
-		conf[k] = conf[k][:-1] if conf[k][-1] == '/' else conf[k]
+		conf[k] = conf[k][:-1] if conf[k].endswith('/') else conf[k]
 
 	callOptionMethod(conf)
 
